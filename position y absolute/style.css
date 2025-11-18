@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  background: #ededed;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: orange;
+  color: white;
+  position: relative;
+}
+
+.box--blue {
+  background-color: blue;
+  top: 20px;
+  left: 10px;
+}
