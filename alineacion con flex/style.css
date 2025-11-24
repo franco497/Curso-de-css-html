@@ -3,19 +3,26 @@ body {
   font-family: sans-serif;
 }
 
+div,
+body {
+  box-sizing: border-box;
+}
+
 .flexbox {
   display: flex;
-  flex-flow: row wrap;
-  height: 100vh;
+  flex-flow: column wrap;
+  border: 2px solid #000;
+  margin: 20px;
+  justify-content: space-evenly;
+  height: 500px;
 }
 
 .flex-item {
-  width: 180px;
   background-color: #800;
-  margin: 10px;
-  color: white;
+  color: #fff;
   font-size: 40px;
   text-align: center;
+  direction: rtl;
 }
 
 .flex-item:first-child {
