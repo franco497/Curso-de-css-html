@@ -68,17 +68,34 @@ h1 {
   background-color: #fff;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 8px 100px 8px 40px;
+  justify-content: center;
+  padding: 6px 20px;
+  position: sticky;
+  top: 0;
+  margin-bottom: 10px;
+  box-shadow: 0 0 25px #0006;
 }
 
 .nav__ul {
   margin: 0;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
 }
 
 .nav__item {
   list-style: none;
+}
+
+.nav__ul-container {
+  flex-grow: 4;
+}
+
+.nav__logo-container,
+.nav__ul-container {
+  flex-grow: 1;
+  text-align: center;
 }
 
 .nav__link {
@@ -117,4 +134,13 @@ h1 {
 .nav__logo {
   width: 70px;
   padding: 10px;
+}
+
+/*--- MAIN SECTION ---*/
+
+main {
+  max-width: 800px;
+  margin: auto;
+  font-size: 30px;
+  text-wrap: pretty;
 }
