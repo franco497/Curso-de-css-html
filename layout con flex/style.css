@@ -2,7 +2,7 @@ body {
   margin: 0;
   font-family: sans-serif;
   box-sizing: border-box;
-  background-color: #f80;
+  background-color: #222;
   color: #fff;
 }
 
@@ -65,7 +65,7 @@ h1 {
 /*--- NAVBAR SECTION ---*/
 
 .nav {
-  background-color: #fff;
+  background-color: #222;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -112,7 +112,7 @@ h1 {
 }
 
 .nav__link:hover {
-  background-color: #f803;
+  background-color: rgba(255, 136, 0, 0.2); /* Más oscuro */
   border-radius: 20px;
   outline: 2px solid #f806;
   outline-offset: -7px;
@@ -127,7 +127,7 @@ h1 {
 }
 
 .link--login:hover {
-  background-color: #b61;
+  background-color: #ff9900;
   outline: none;
 }
 
@@ -143,4 +143,7 @@ main {
   margin: auto;
   font-size: 30px;
   text-wrap: pretty;
+  background-color: #222; /* Mismo color */
+  padding: 20px; /* Agrega algo de padding */
+  border-radius: 8px; /* Opcional: bordes redondeados */
 }
