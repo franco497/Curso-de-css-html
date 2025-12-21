@@ -1,12 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <title>srcset y sizes</title>
-  </head>
-  <body>
+    <style>
+        body {
+            margin: 20px;
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+        }
+        .info {
+            background: #333;
+            color: white;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border: 3px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="info">
+        <p><strong>Ventana:</strong> <span id="winWidth">--</span>px</p>
+        <p><strong>Imagen cargada:</strong> <span id="imgName">--</span></p>
+        <p><strong>Ancho imagen:</strong> <span id="imgWidth">--</span>px</p>
+    </div>
     
-  </body>
+    <img
+        id="responsive-img"
+        src="/imagenes/fondo-cyber-puck.png"
+        alt="Cyber Puck"
+        srcset="
+            /imagenes/fondo-cyber-puck-small.png 529w,
+            /imagenes/fondo-cyber-medium.png 1058w,
+            /imagenes/fondo-cyber-puck.png 1588w
+        "
+        sizes="(max-width: 600px) 100vw,
+               (max-width: 1200px) 50vw,
+               33vw"
+    />
+    
+    <script>
+        const img = document.getElementById('responsive-img');
+        
+        function updateInfo() {
+            const winWidth = window.innerWidth;
+            const currentSrc = img.currentSrc || img.src;
+            const fileName = currentSrc.split('/').pop();
+            
+            document.getElementById('winWidth').textContent = winWidth;
+            document.getElementById('imgName').textContent = fileName;
+            document.getElementById('imgWidth').textContent = img.naturalWidth;
+            
+            console.log('=== DEBUG ===');
+            console.log('Ventana:', winWidth + 'px');
+            console.log('Imagen:', fileName);
+            console.log('Ancho real imagen:', img.naturalWidth + 'px');
+            console.log('currentSrc:', img.currentSrc);
+        }
+        
+        // Event listeners
+        window.addEventListener('load', updateInfo);
+        window.addEventListener('resize', updateInfo);
+        img.addEventListener('load', updateInfo);
+        
+        // Actualizar también después de 1 segundo (por si las imágenes tardan)
+        setTimeout(updateInfo, 1000);
+    </script>
+</body>
 </html>
