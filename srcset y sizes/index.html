@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <title>srcset y sizes</title>
     <style>
-        body {
-            margin: 20px;
-            font-family: Arial, sans-serif;
-            background: #f0f0f0;
-        }
-        .info {
-            background: #333;
-            color: white;
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            border: 3px solid blue;
-        }
+      body {
+        margin: 20px;
+        font-family: Arial, sans-serif;
+        background: #f0f0f0;
+      }
+      .info {
+        background: #333;
+        color: white;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        border: 3px solid blue;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="info">
-        <p><strong>Ventana:</strong> <span id="winWidth">--</span>px</p>
-        <p><strong>Imagen cargada:</strong> <span id="imgName">--</span></p>
-        <p><strong>Ancho imagen:</strong> <span id="imgWidth">--</span>px</p>
+      <p><strong>Ventana:</strong> <span id="winWidth">--</span>px</p>
+      <p><strong>Imagen cargada:</strong> <span id="imgName">--</span></p>
+      <p><strong>Ancho imagen:</strong> <span id="imgWidth">--</span>px</p>
     </div>
-    
-    <img
+
+    <!--     <img
         id="responsive-img"
         src="/imagenes/fondo-cyber-puck.png"
         alt="Cyber Puck"
@@ -45,34 +45,102 @@
         sizes="(max-width: 600px) 100vw,
                (max-width: 1200px) 50vw,
                33vw"
+    /> -->
+
+    <img
+      id="responsive-img"
+      src="/imagenes/fondo-cyber-puck.png"
+      alt="Cyber Puck"
+      srcset="
+        /imagenes/fondo-cyber-puck-small.png  529w,
+        /imagenes/fondo-cyber-medium.png     1000w,
+        /imagenes/fondo-cyber-puck.png       1588w
+      "
+      sizes="(max-width: 600px) 100vw,
+           (max-width: 1200px) 50vw,
+           33vw"
     />
-    
+
     <script>
-        const img = document.getElementById('responsive-img');
-        
-        function updateInfo() {
-            const winWidth = window.innerWidth;
-            const currentSrc = img.currentSrc || img.src;
-            const fileName = currentSrc.split('/').pop();
-            
-            document.getElementById('winWidth').textContent = winWidth;
-            document.getElementById('imgName').textContent = fileName;
-            document.getElementById('imgWidth').textContent = img.naturalWidth;
-            
-            console.log('=== DEBUG ===');
-            console.log('Ventana:', winWidth + 'px');
-            console.log('Imagen:', fileName);
-            console.log('Ancho real imagen:', img.naturalWidth + 'px');
-            console.log('currentSrc:', img.currentSrc);
+      const img = document.getElementById("responsive-img");
+      console.log("Small actual:", img.naturalWidth);
+
+      function updateInfo() {
+        const winWidth = window.innerWidth;
+        const currentSrc = img.currentSrc || img.src;
+        const fileName = currentSrc.split("/").pop();
+
+        document.getElementById("winWidth").textContent = winWidth;
+        document.getElementById("imgName").textContent = fileName;
+        document.getElementById("imgWidth").textContent = img.naturalWidth;
+
+        console.log("=== DEBUG COMPLETO ===");
+        console.log("Ventana:", winWidth + "px");
+        console.log("DPR:", window.devicePixelRatio);
+        console.log("Imagen cargada:", fileName);
+        console.log("Ancho real imagen:", img.naturalWidth + "px");
+
+        // Calcula render width según sizes
+        let renderWidth;
+        if (winWidth <= 600) {
+          renderWidth = winWidth; // 100vw
+          console.log("Regla aplicada: (max-width: 600px) 100vw");
+        } else if (winWidth <= 1200) {
+          renderWidth = winWidth * 0.5; // 50vw
+          console.log("Regla aplicada: (max-width: 1200px) 50vw");
+        } else {
+          renderWidth = winWidth * 0.33; // 33vw
+          console.log("Regla aplicada: 33vw (default)");
         }
-        
-        // Event listeners
-        window.addEventListener('load', updateInfo);
-        window.addEventListener('resize', updateInfo);
-        img.addEventListener('load', updateInfo);
-        
-        // Actualizar también después de 1 segundo (por si las imágenes tardan)
-        setTimeout(updateInfo, 1000);
+
+        console.log("Render width calculado:", Math.round(renderWidth) + "px");
+
+        // Calcula el ancho que necesita considerar (con DPR)
+        const neededWidth = renderWidth * window.devicePixelRatio;
+        console.log(
+          "Ancho necesario (con DPR):",
+          Math.round(neededWidth) + "px"
+        );
+
+        // Muestra qué opciones tiene el navegador
+        console.log("Opciones en srcset:");
+        console.log("- Small: 525w (para ~525px)");
+        console.log("- Medium: 1000w (para ~1000px)");
+        console.log("- Large: 1500w (para ~1500px)");
+
+        // ¿Qué imagen debería elegir?
+        if (neededWidth <= 525) {
+          console.log("Recomendado: Small (525w)");
+        } else if (neededWidth <= 1000) {
+          console.log("Recomendado: Medium (1000w)");
+        } else {
+          console.log("Recomendado: Large (1500w)");
+        }
+      }
+      // Event listeners
+      window.addEventListener("load", updateInfo);
+      window.addEventListener("resize", updateInfo);
+      img.addEventListener("load", updateInfo);
+
+      // Actualizar también después de 1 segundo (por si las imágenes tardan)
+      setTimeout(updateInfo, 1000);
+
+      // Ejecuta en consola para verificar todas las imágenes
+      const images = [
+        "/imagenes/fondo-cyber-puck-small.png",
+        "/imagenes/fondo-cyber-medium.png",
+        "/imagenes/fondo-cyber-puck.png",
+      ];
+
+      images.forEach((src) => {
+        const img = new Image();
+        img.onload = function () {
+          console.log(
+            `${src}: ${this.naturalWidth}px x ${this.naturalHeight}px`
+          );
+        };
+        img.src = src;
+      });
     </script>
-</body>
+  </body>
 </html>
