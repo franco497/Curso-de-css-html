@@ -10,7 +10,6 @@ body {
 
 .flexbox {
   display: flex;
-  flex-wrap: wrap;
 }
 
 .flex-item {
@@ -18,9 +17,10 @@ body {
   padding: 30px;
   border: 1px solid #f00;
   flex-grow: 1;
-  flex-basis: 0;
-  min-width: 300px;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
+  .flexbox {
+    flex-direction: column;
+  }
 }
