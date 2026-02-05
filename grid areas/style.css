@@ -85,20 +85,24 @@ aside {
 
 @media screen and (max-width: 800px) {
   .grid {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "nav"
-      "main"
-      "aside";
+    grid-template-columns: minmax(200px, 1fr) minmax(300px, 3fr);
   }
-
   nav,
   aside {
     height: auto;
     position: static;
   }
-
   aside {
     display: none;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "nav"
+      "main"
+      "aside";
   }
 }
