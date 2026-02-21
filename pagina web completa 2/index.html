@@ -17,13 +17,13 @@
       </div>
       <nav class="header__nav">
         <ul class="header__nav-list">
-          <li class="header__nav-item"><a href="#">About</a></li>
-          <li class="header__nav-item"><a href="#">Portfolio</a></li>
-          <li class="header__nav-item"><a href="#">Contact</a></li>
+          <li class="header__nav-item"><a href="#profile">About</a></li>
+          <li class="header__nav-item"><a href="#portfolio">Portfolio</a></li>
+          <li class="header__nav-item"><a href="#contact">Contact</a></li>
         </ul>
       </nav>
     </header>
-    <main class="profile">
+    <main class="profile" id="profile">
       <div class="profile__wrapper">
         <div class="profile__img-container">
           <img src="dalto.jpg" class="profile__img" />
@@ -78,7 +78,7 @@
         </div>
       </div>
     </main>
-    <section class="portfolio">
+    <section class="portfolio" id="portfolio">
       <h2 class="portfolio__title">PORTFOLIO SECTION</h2>
       <div class="portfolio__project-container">
         <div class="portfolio__project">
@@ -101,5 +101,40 @@
         </div>
       </div>
     </section>
+    <section class="form" id="contact">
+      <h2 class="form__title">CONTACT</h2>
+      <form class="form__form">
+        <div class="form__input-container">
+          <label
+            >Nombre
+            <input type="text" placeholder="Franco" />
+          </label>
+        </div>
+        <div class="form__input-container">
+          <label
+            >Apellido
+            <input type="text" placeholder="De Vincentis" />
+          </label>
+        </div>
+        <div class="form__input-container">
+          <label
+            >E-mail
+            <input type="email" placeholder="devincentisf35@gmail.com" />
+          </label>
+        </div>
+        <div class="form__input-container">
+          <label
+            >Mensaje
+            <textarea placeholder="Escribe tu mensaje aquí..."> </textarea>
+          </label>
+        </div>
+        <div class="form__input-container">
+          <input type="submit" />
+        </div>
+      </form>
+    </section>
+    <footer">
+       <strong>ADA 13</strong> - Copyright 
+    </footer>
   </body>
 </html>
